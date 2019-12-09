@@ -1,10 +1,5 @@
 FROM php:7.4-fpm
 
-RUN mkdir -p /root/.ssh/ && chmod 700 /root/.ssh/
-COPY ./id_rsa /root/.ssh/id_rsa
-RUN chmod 700 /root/.ssh/id_rsa
-
-
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -36,7 +31,7 @@ WORKDIR /app
 ENV LANG C.UTF-8
 
 # change global configuration of repository
-RUN composer config -g repositories.packagist composer http://ce50331.starbucks.net:8081/repository/composer-central/
+RUN composer config -g repositories.packagist composer https://packagist.org/
 
 ENTRYPOINT ["/bin/sh", "/docker-entrypoint.sh"]
 
